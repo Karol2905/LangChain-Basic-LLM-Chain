@@ -1,211 +1,282 @@
+Perfecto 👌 vamos a dejar tu README **bien profesional**, claro y listo para entregar el lab.
 
+Te voy a dar una versión corregida en español, explicando que usan **Gemini (Google AI)** y cómo configurarlo correctamente.
 
-# 🚀 LangChain Basic LLM Chain (Local con Ollama)
-
-## 📖 Descripción General
-
-Este proyecto implementa una **LLM Chain básica utilizando LangChain v1 y un modelo de lenguaje ejecutado localmente con Ollama**.
-
-El objetivo es comprender:
-
-* Cómo se estructuran los prompts en LangChain.
-* Cómo se conecta un LLM a una cadena.
-* Cómo fluye la información desde el usuario hasta la respuesta generada.
-* Cómo ejecutar modelos de lenguaje de manera local sin depender de APIs externas.
-
-A diferencia de implementaciones basadas en OpenAI o Gemini, este proyecto funciona completamente **offline**, utilizando un modelo descargado localmente mediante Ollama.
+Puedes copiarlo y pegarlo en tu `README.md`.
 
 ---
 
-# 🧠 Arquitectura del Sistema
+# 📘 LangChain Basic LLM Chain (Gemini)
 
-## 🔹 Flujo de ejecución
+## 📌 Descripción del Proyecto
 
-```
-Usuario
-   ↓
-PromptTemplate
-   ↓
-LLM (ChatOllama)
-   ↓
-Respuesta generada
-```
+Este repositorio contiene una implementación básica de una **LLM Chain utilizando LangChain**, conectada al modelo **Gemini de Google AI**.
 
-## 🔹 Componentes
+El proyecto permite al usuario ingresar un tema por consola y obtener una explicación generada por el modelo de lenguaje.
 
-| Componente            | Rol                                        |
-| --------------------- | ------------------------------------------ |
-| LangChain Core        | Orquesta la cadena y los prompts           |
-| PromptTemplate        | Define la estructura del mensaje al modelo |
-| ChatOllama            | Interfaz con el modelo local               |
-| Ollama                | Motor que ejecuta el modelo                |
-| Modelo (gemma:2b) | Generación de texto                        |
+Se utiliza:
+
+* 🧠 **LangChain**
+* 🤖 **Gemini (Google Generative AI)**
+* 🔐 Variables de entorno con `.env`
+* 🐍 Python
 
 ---
 
-# 🏗 Diseño Técnico
 
-Este proyecto utiliza la sintaxis moderna de **LangChain Expression Language (LCEL)**:
-
-```python
-chain = prompt | llm
-```
-
-Esta arquitectura permite:
-
-* Composición modular
-* Encadenamiento declarativo
-* Mejor escalabilidad
-* Integración futura con RAG o agentes
-
----
-
-# 💡 ¿Qué hace el programa?
-
-1. Inicializa un modelo local ( `gemma:2b`)
-2. Define una plantilla de prompt con una variable `{topic}`
-3. Construye una cadena conectando prompt + modelo
-4. Solicita un tema al usuario
-5. Genera una explicación sencilla sobre el tema
-
-Ejemplo:
-
-```
-Enter a topic: Neural Networks
-```
-
-Salida:
-
-```
-Neural networks are computer systems inspired by how the human brain works...
-```
-
----
-
-# ⚙️ Requisitos
+## ⚙️ Requisitos
 
 * Python 3.10+
-* Ollama instalado
-* Modelo descargado
 * pip
 
 ---
 
-# 🚀 Instalación Paso a Paso
+## 📦 Instalación
 
-## 1️⃣ Instalar Ollama
-
-Linux / Mac:
+### 1️⃣ Clonar el repositorio
 
 ```bash
-curl -fsSL https://ollama.com/install.sh | sh
+git clone <URL_DEL_REPO>
+cd LangChain-Basic-LLM-Chain
 ```
 
-Verificar:
+### 2️⃣ Crear entorno virtual (recomendado)
 
 ```bash
-ollama --version
+python -m venv venv
+source venv/bin/activate
+```
+
+En Windows:
+
+```bash
+venv\Scripts\activate
 ```
 
 ---
 
-## 2️⃣ Descargar un modelo
-
-Ejemplo con Gemma:
-
-```bash
-ollama pull gemma:2b
-```
-
-Otros modelos compatibles:
-
-* `llama3`
-* `mistral`
-* `phi3`
-
----
-
-## 3️⃣ Instalar dependencias
-
-Dentro del proyecto:
+### 3️⃣ Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-O manualmente:
+Si no tienes el archivo actualizado, las dependencias principales son:
 
 ```bash
-pip install langchain langchain-community
+pip install langchain langchain-google-genai python-dotenv
 ```
 
 ---
 
-## 4️⃣ Ejecutar
+## 🔐 Configuración de la API Key (Gemini)
+
+### 1️⃣ Crear archivo `.env`
+
+Copia el archivo de ejemplo:
+
+```bash
+cp .env.example .env
+```
+
+### 2️⃣ Agrega tu API Key dentro de `.env`
+
+```
+GOOGLE_API_KEY=tu_api_key_aqui
+```
+
+Puedes obtener tu API Key en:
+
+[https://ai.google.dev/](https://ai.google.dev/)
+
+⚠️ IMPORTANTE:
+El archivo `.env` NO debe subirse a GitHub. Está incluido en `.gitignore`.
+
+---
+
+## ▶️ Cómo ejecutar el proyecto
 
 ```bash
 python main.py
 ```
 
+El programa pedirá un tema:
+
+```
+Enter a topic: artificial intelligence
+```
+
+Y generará una explicación utilizando Gemini.
+
 ---
 
-# 📂 Estructura del Proyecto
+## 🧠 ¿Qué hace este proyecto?
+
+Este proyecto demuestra:
+
+* Cómo conectar LangChain con un LLM externo
+* Cómo estructurar prompts usando PromptTemplate
+* Cómo manejar variables de entorno
+* Cómo construir una cadena simple (LLM Chain)
+
+Es la base para luego construir sistemas más avanzados como:
+
+* RAG (Retrieval-Augmented Generation)
+* Agentes
+* Sistemas multi-step
+* Chatbots con memoria
+
+---
+
+## 📂 Estructura del Repositorio
 
 ```
 LangChain-Basic-LLM-Chain/
 │
 ├── main.py
 ├── README.md
-└── requirements.txt
+├── requirements.txt
+├── .env.example
+├── .gitignore
 ```
 
 ---
 
-# 🎯 ¿Por qué usar Ollama en este proyecto?
 
-| OpenAI API        | Ollama                 |
-| ----------------- | ---------------------- |
-| Requiere API key  | ❌ No requiere API key  |
-| Tiene costo       | ❌ Gratis               |
-| Requiere internet | ❌ Funciona offline     |
-| Depende de cuotas | ❌ Sin límites externos |
 
-Ideal para:
 
-* Desarrollo local
-* Laboratorios académicos
-* Prototipado rápido
-* Pruebas sin costos
 
----
+## 🏗️ Arquitectura Técnica
 
-# 🔍 Posibles Extensiones Futuras
+### 📌 Visión General
 
-Este proyecto puede evolucionar hacia:
+Este proyecto implementa una arquitectura básica de **LLM Chain** utilizando **LangChain** como framework de orquestación y **Google Gemini** como modelo de lenguaje.
 
-* 🔎 Implementación de RAG (Retrieval-Augmented Generation)
-* 🤖 Agentes con herramientas
-* 📚 Indexación de documentos
-* 🧠 Sistemas multi-agente
-* 🌐 API REST con FastAPI
+La arquitectura sigue un flujo simple:
+
+```
+Usuario → PromptTemplate → LLM (Gemini) → Respuesta generada
+```
 
 ---
 
-# 📘 Aprendizajes Clave
+### 🔎 Componentes Principales
 
-* Cómo funciona una LLM Chain en LangChain
-* Diferencia entre APIs externas y modelos locales
-* Arquitectura básica de sistemas LLM
-* Modularidad usando LCEL
-* Integración futura con arquitecturas RAG
+#### 1️⃣ Usuario (Input)
+
+El usuario introduce un tema desde la terminal:
+
+```bash
+Enter a topic:
+```
+
+Este input se pasa dinámicamente a la plantilla de prompt.
+
+---
+
+#### 2️⃣ PromptTemplate (LangChain)
+
+Se define una plantilla estructurada que controla cómo se envía la instrucción al modelo:
+
+```python
+prompt = PromptTemplate(
+    input_variables=["topic"],
+    template="Explain the following topic in simple terms: {topic}"
+)
+```
+
+🔹 **¿Por qué es importante?**
+
+* Permite separar lógica y lenguaje natural.
+* Hace que el sistema sea reutilizable.
+* Facilita modificar el comportamiento sin tocar el modelo.
 
 ---
 
-# 🧾 Conclusión
+#### 3️⃣ LLM (Google Gemini)
 
-Este repositorio demuestra la implementación mínima funcional de una cadena LLM utilizando un modelo local con Ollama.
+El modelo se inicializa mediante:
 
-Proporciona una base sólida para construir sistemas más complejos como RAGs o agentes inteligentes.
+```python
+llm = ChatGoogleGenerativeAI(
+    model="gemini-flash-lite-latest",
+    temperature=0.7
+)
+```
+
+🔹 **Responsabilidad:**
+
+* Procesar el prompt.
+* Generar texto coherente.
+* Responder en lenguaje natural.
+
+🔹 **Parámetros importantes:**
+
+* `model`: define la versión del modelo.
+* `temperature`: controla creatividad (más alto = más creativo).
 
 ---
+
+#### 4️⃣ Cadena (Chain)
+
+La cadena conecta el prompt con el modelo:
+
+```python
+chain = prompt | llm
+```
+
+Esto representa un **pipeline declarativo**, donde:
+
+* El input fluye primero al prompt.
+* Luego el prompt procesado se envía al modelo.
+
+---
+
+### 🔄 Flujo de Ejecución
+
+1. Se cargan variables de entorno (`.env`).
+2. Se inicializa el modelo Gemini.
+3. Se construye el PromptTemplate.
+4. Se crea la cadena.
+5. El usuario ingresa un tema.
+6. El sistema genera una respuesta.
+
+---
+
+### 🧠 Relación con Arquitecturas de IA
+
+Esta arquitectura es:
+
+* ✅ Modular
+* ✅ Escalable
+* ✅ Compatible con RAG
+* ✅ Compatible con agentes
+
+En proyectos más avanzados, esta estructura puede evolucionar a:
+
+```
+Usuario
+   ↓
+Retriever (Vector DB)
+   ↓
+Contexto relevante
+   ↓
+Prompt enriquecido
+   ↓
+LLM
+   ↓
+Respuesta fundamentada
+```
+
+---
+
+### 🚀 Escalabilidad
+
+Este proyecto puede extenderse fácilmente para:
+
+* Implementar RAG (Retrieval-Augmented Generation)
+* Añadir memoria conversacional
+* Integrar herramientas externas
+* Conectar APIs
+* Convertirse en un agente autónomo
 
